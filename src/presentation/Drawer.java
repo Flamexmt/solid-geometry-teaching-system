@@ -1,3 +1,4 @@
+package presentation;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -6,8 +7,12 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import logic.Analytic;
+import logic.Xoy_model;
 
 import javax.swing.JFrame;
+
+import logic.Analytic;
 
 public class Drawer extends JFrame implements MouseMotionListener,MouseListener{
     private Color Brushcolor;//±ÊË¢ÑÕÉ«
@@ -47,10 +52,15 @@ public class Drawer extends JFrame implements MouseMotionListener,MouseListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		a.DrawXoy();
-		a.DrawParabola(1, 0, 0);
-		a.DrawInverse(1);
-		a.Drawlinear(1, 0);
+		Graphics g=this.getGraphics();
+		g.clearRect(0, 0, 1200, 800);
+		Xoy_model xoymod=new Xoy_model(e.getX(),e.getY(),300,300,300,300);
+		System.out.println(e.getX());
+		System.out.println(e.getY());
+		a.DrawXoy(xoymod);
+		a.DrawParabola(xoymod,2, 0, 0);
+		a.DrawInverse(xoymod,1);
+		a.Drawlinear(xoymod,1, 0);
 		System.out.println("good");
 	}
 	@Override
